@@ -284,6 +284,7 @@ class Enemy {
     if (this.type === 'runner') {
       const spd = Math.hypot(this.vx, this.vy);
       if (spd > 1) {
+        ctx.save();
         const nx = -this.vx / spd, ny = -this.vy / spd;
         ctx.strokeStyle = this.innerColor;
         for (let i = 0; i < 3; i++) {
@@ -295,7 +296,7 @@ class Enemy {
           ctx.lineTo(x + nx * (half + 1 + i * 2 + len), y + ny * (half + 1 + i * 2 + len));
           ctx.stroke();
         }
-        ctx.globalAlpha = 1;
+        ctx.restore();
       }
     }
 
@@ -560,6 +561,7 @@ function checkLevelComplete() {
     score          += level * 150;
     transitionTimer = 0;
     gameState       = 'LEVEL_TRANSITION';
+    bullets         = bullets.filter(b => b.owner !== 'enemy');
     playSound(440, 'triangle', 0.6, 0.22);
   }
 }
@@ -725,7 +727,7 @@ function renderHUD() {
   ctx.strokeStyle = '#444';
   ctx.lineWidth = 1;
   ctx.strokeRect(bx, by, bw, bh);
-  ctx.fillStyle = 'rgba(0,0,0,0.7)';
+  ctx.fillStyle = '#ffffff';
   ctx.font = 'bold 10px monospace';
   ctx.textAlign = 'left';
   ctx.fillText(`HP  ${player.hp} / ${player.maxHp}`, bx + 5, by + 11);
