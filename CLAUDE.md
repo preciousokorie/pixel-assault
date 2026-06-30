@@ -20,13 +20,26 @@ There are no tests, no linter, and no build pipeline. Verification is done by op
 
 ## Git workflow
 
+After every meaningful unit of work — a feature added, a bug fixed, a refactor completed — commit and push immediately. Never accumulate multiple unrelated changes in one commit. The goal is that GitHub always reflects the current working state of the project.
+
 ```
 git add <files>
 git commit -m "type: short description"
 git push
 ```
 
-Commit types in use: `feat`, `fix`. Remote is `origin` (GitHub: `preciousokorie/pixel-assault`). Branch is `master`.
+Commit types in use: `feat`, `fix`, `docs`, `refactor`. Remote is `origin` (GitHub: `preciousokorie/pixel-assault`). Branch is `master`.
+
+On Windows, use PowerShell here-strings for multi-line commit messages:
+```powershell
+git commit -m @'
+feat: short summary
+
+Longer body if needed.
+
+Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>
+'@
+```
 
 ## Pixel Assault architecture (`index.html` + `game.js`)
 
